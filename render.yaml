@@ -12,3 +12,5 @@ services:
         generateValue: true
       - key: PYTHON_VERSION
         value: 3.12.7
+      - key: SAFERIDE_DEMO
+        value: "1"
