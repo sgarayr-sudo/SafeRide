@@ -52,7 +52,7 @@
       ]
     ],
     "extra": {
-      "apiUrl": "PON_AQUI_LA_URL_DE_RENDER"
+      "apiUrl": "https://saferide-api-y6qy.onrender.com"
     }
   }
 }
