@@ -7,8 +7,7 @@ responde, el aviso a sus contactos se registra (y el servidor lo escala solo si 
 ```
 SafeRide/
 ├─ backend/          Python · FastAPI + SQLite + JWT   (API, pruebas)
-├─ app/              Expo (React Native)               (15 pantallas)   ← tu carpeta actual de la app
-├─ app-integracion/  Alerta de choque + Bluetooth del casco, lista para copiar dentro de app/
+├─ app/              Expo SDK 58 (React Native, Android)  — 5 pantallas + alerta de choque + Bluetooth del casco
 └─ docs/BLE_PROTOCOLO.md   Contrato de datos casco ↔ app (para el firmware)
 ```
 
@@ -26,13 +25,15 @@ una y se guarda en `backend/.saferide_secret`), `SAFERIDE_DB`, `SAFERIDE_DEMO`, 
 
 En Windows puedes usar `INICIAR.bat`, que prepara todo y abre servidor y app.
 
-## 2. App
-Requiere Node 18+. Sin Bluetooth real funciona con **Expo Go**:
+## 2. App (celular Android)
+Pantallas: acceso, **Inicio** (casco, recorrido con GPS, simulador de alerta), **Contactos**, **Historial** (recorridos y
+alertas con su línea de tiempo) y **Perfil** (ajustes, Bluetooth del casco, datos de demostración).
 ```bash
 cd app && npm install && npx expo start
 ```
-Para conectar el **casco por Bluetooth** hace falta un *development build* (Expo Go no incluye módulos nativos
-como `react-native-ble-plx`). Pasos en [`app-integracion/INTEGRACION.md`](app-integracion/INTEGRACION.md).
+La dirección del servidor se define en `app/app.json` → `extra.apiUrl` (o se escribe en la pantalla de acceso).
+Para generar el **APK instalable** sigue [`DEPLOY.md`](DEPLOY.md). El Bluetooth del casco funciona en el APK
+(no en Expo Go) y está desactivado hasta que el usuario lo active en Perfil.
 
 ## 3. Cómo funciona la alerta de choque
 1. El casco detecta el impacto, **activa su buzzer** y avisa a la app por BLE (`docs/BLE_PROTOCOLO.md`).
@@ -62,6 +63,7 @@ Sin casco, el botón **Simular alerta de posible caída** (Inicio) usa el mismo 
 ## Alcance del prototipo
 - El «aviso a contactos» **se registra en el servidor; no envía SMS, WhatsApp ni llama a emergencias.** La línea de
   tiempo lo indica así. Falta integrar un proveedor (Twilio, WhatsApp Business, push) para enviarlo de verdad.
-- El protocolo BLE es una propuesta pendiente de validar con el firmware y el hardware reales.
+- El protocolo BLE es una propuesta pendiente de validar con el firmware y el hardware reales (la app no se ha probado con un casco físico).
+- El APK no se probó en un teléfono físico dentro de esta revisión: la app compila y empaqueta (tipos, bundle y configuración Android verificados), pero conviene probarla antes de repartirla.
 - Con la app cerrada o el teléfono bloqueado, la conexión BLE exige configuración nativa adicional.
 - Cuenta demo con contraseña pública: desactívala en producción con `SAFERIDE_DEMO=0`.

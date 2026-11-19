@@ -1,7 +1,7 @@
 # Protocolo BLE casco ↔ app
 
 Contrato entre el firmware del casco (periférico BLE, p. ej. ESP32) y la app (central).
-La app ya lo implementa en `app-integracion/src/crash/protocol.ts`; el firmware debe respetar estos valores.
+La app ya lo implementa en `app/src/crash/protocol.ts`; el firmware debe respetar estos valores.
 
 > Estado: **propuesta sin probar con hardware real.** Si el casco usa otro módulo o ya tiene un
 > protocolo propio, ajusta `protocol.ts` y este documento a lo que exista.
@@ -63,4 +63,4 @@ servidor: si la app no responde (teléfono apagado, sin señal), escala sola al 
 ## Limitaciones conocidas
 - El «aviso a contactos» **solo se registra** en el servidor; falta integrar SMS/WhatsApp/push para enviarlo de verdad.
 - Con la app cerrada o el teléfono bloqueado, BLE en segundo plano exige configuración nativa adicional
-  (ver `app-integracion/INTEGRACION.md`). El buzzer del casco y la escalada del servidor funcionan igual.
+  (requiere configuración nativa adicional; la app de este repo conecta solo con la pantalla abierta). El buzzer del casco y la escalada del servidor funcionan igual.
