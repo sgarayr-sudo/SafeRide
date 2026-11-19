@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "SafeRide",
+    "slug": "saferide",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#101828"
+    },
+    "android": {
+      "package": "com.saferide.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#101828",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "blockedPermissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.SYSTEM_ALERT_WINDOW"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "SafeRide usa tu ubicación para registrar tus recorridos y enviarla en una alerta de choque."
+        }
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false
+        }
+      ],
+      [
+        "react-native-ble-plx",
+        {
+          "isBackgroundEnabled": false,
+          "modes": [
+            "central"
+          ],
+          "bluetoothAlwaysPermission": "SafeRide usa Bluetooth para conectarse a tu casco."
+        }
+      ]
+    ],
+    "extra": {
+      "apiUrl": "PON_AQUI_LA_URL_DE_RENDER"
+    }
+  }
+}
